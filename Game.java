@@ -1,5 +1,7 @@
 import java.util.*;
 
+import javax.management.RuntimeErrorException;
+
 public class Game implements Contract {
     
     /** player */
@@ -43,7 +45,7 @@ public class Game implements Contract {
      * remove the item from the inventory
      */
     public String drop(String item){
-        if (checkInventory(item) == true){
+        if (checkInventory(item)){
             this.inventory.remove(item);
             return "Dropped " + item;
         }else{
@@ -80,7 +82,7 @@ public class Game implements Contract {
         if (direction == "South" || direction == "North" || direction == "East" || direction == "West") {
             return true;
         }else {
-            return  false;
+            return false;
         }
     }
 
@@ -119,12 +121,17 @@ public class Game implements Contract {
      * rest and add health points
      */
     public void rest(){
-        if (this.points != 100) {
-            this.points += 10;
-            System.out.println("Recovering... " + this.points + " ☆彡");
-        } else {
+        try {
+            if (this.points == 100) {
+                throw new RuntimeErrorException(new Error());
+            } else {
+                this.points += 10;
+                System.out.println("Recovering... " + this.points + " ☆彡");
+            }
+        } catch (RuntimeErrorException e) {
             System.out.println("Cannot recover (T^T)");
         }
+       
     }
 
     /**
