@@ -26,7 +26,7 @@ public class Game implements Contract {
 
     /**
      * check the inventory
-     * @param item
+     * @param item in game
      * @return T/F the inventory contains the item
      */
     public boolean checkInventory(String item){
@@ -35,6 +35,7 @@ public class Game implements Contract {
     
     /**
      * Add the item to the inventory
+     * @param item the item to grab
      */
     public void grab(String item){
         this.inventory.add(item);
@@ -43,6 +44,8 @@ public class Game implements Contract {
 
     /**
      * remove the item from the inventory
+     * @param item the item to drop
+     * @return whether the item is removed
      */
     public String drop(String item){
         if (checkInventory(item)){
@@ -61,6 +64,7 @@ public class Game implements Contract {
 
     /**
      * examine the item 
+     * @param item the item to examine
      */
     public void examine(String item){
         // prints out random comment
@@ -70,6 +74,7 @@ public class Game implements Contract {
 
     /**
      * use the item 
+     * @param item the item to use 
      */
     public void use(String item){
         System.out.println("Used @(￣-￣)@");
@@ -77,6 +82,8 @@ public class Game implements Contract {
 
     /**
      * walk only in compass direction
+     * @param direction the compass direction to walk
+     * @return T/F the walk movement is implemented 
      */
     public boolean walk(String direction){
         if (direction == "South" || direction == "North" || direction == "East" || direction == "West") {
@@ -88,6 +95,9 @@ public class Game implements Contract {
 
     /**
      * fly in a certain area
+     * @param x the x-coordinate
+     * @param y the y-coordinate
+     * @return T/F the fly movement is implemented 
      */
     public boolean fly(int x, int y){
         if (x <= 100 && x >= -100 && y <= 100 && y>= -100){
